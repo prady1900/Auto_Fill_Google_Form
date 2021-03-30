@@ -6,17 +6,19 @@ driver = webdriver.Chrome(executable_path=PATH)
 
 
 def run_script(name):
-    driver.get("https://forms.gle/gjXfSvdkudWcqVG2A")
     # Page 1 getting Variable
+    driver.get("https://forms.gle/gjXfSvdkudWcqVG2A")
     driver.implicitly_wait(5)
-    radio_btn = driver.find_elements_by_class_name("docssharedWizToggleLabeledLabelWrapper")
-    name_area = driver.find_element_by_class_name("quantumWizTextinputPaperinputInput")
-    next_btn = driver.find_element_by_class_name("appsMaterialWizButtonPaperbuttonContent")
 
-    val = random.randint(0, 4)
-    driver.implicitly_wait(2)
+    radio_btn = driver.find_elements_by_class_name("docssharedWizToggleLabeledLabelWrapper")
+
+
+    driver.implicitly_wait(4)
+    name_area = driver.find_element_by_xpath('/html/body/div/div[2]/form/div[2]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[1]/input')
+
     name_area.send_keys(name)
 
+    val = random.randint(0, 4)
     # Select Random Age Group.
     radio_btn[val].click()
 
@@ -24,15 +26,19 @@ def run_script(name):
     # Select Gender
     radio_btn[5].click()
 
-
     driver.implicitly_wait(3)
+
+    next_btn = driver.find_element_by_class_name("appsMaterialWizButtonPaperbuttonContent")
     next_btn.click()
+
+    driver.implicitly_wait(5)
     radio_btn_1 = driver.find_elements_by_class_name("docssharedWizToggleLabeledLabelWrapper")
     val = random.randint(0, 1)
     radio_btn_1[val].click()
 
     val = random.randint(2, 4)
     radio_btn_1[val].click()
+
 
     val = random.randint(5, 7)
     radio_btn_1[val].click()
@@ -52,10 +58,11 @@ def run_script(name):
     val = random.randint(22, 24)
     radio_btn_1[val].click()
 
+    driver.implicitly_wait(4)
     final_submit_btn = driver.find_element_by_class_name("appsMaterialWizButtonPaperbuttonContent")
     final_submit_btn.click()
 
-    driver.implicitly_wait(3)
+    driver.implicitly_wait(4)
     reGen_Link = driver.find_element_by_partial_link_text("Submit")
     reGen_Link.click()
 
@@ -68,7 +75,7 @@ count = 0
 for name in name_list:
     if count > 100:
         break
-    run_script(str(name))
+    run_script(name)
     count = count+1
 
 
